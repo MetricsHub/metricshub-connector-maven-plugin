@@ -282,6 +282,20 @@
 				</configuration>
 			</plugin>
 
+			<!-- checkstyle -->
+			<plugin>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<configuration>
+					<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
+					<linkXref>true</linkXref>
+					<configLocation>checkstyle.xml</configLocation>
+					<sourceDirectories>
+						<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+						<sourceDirectory>${project.basedir}/src/test/java</sourceDirectory>
+					</sourceDirectories>
+				</configuration>
+			</plugin>
+			
 		</plugins>
 	</reporting>
 
