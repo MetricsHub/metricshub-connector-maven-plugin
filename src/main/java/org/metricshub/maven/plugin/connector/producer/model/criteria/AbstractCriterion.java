@@ -53,5 +53,10 @@ public abstract class AbstractCriterion {
 		return nonNullTextOrDefault(criterion.get("expectedResult"), null);
 	}
 
+	/**
+	 * Produces the criterion in the given sink.
+	 *
+	 * @param sink The sink to produce the criterion in.
+	 */
 	public abstract void produce(Sink sink);
 }
