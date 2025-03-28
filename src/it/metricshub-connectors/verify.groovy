@@ -201,9 +201,9 @@ assert htmlText =~ /metricshub.*-t linux.*--ssh.*--sudo-command-list/ : "lmsenso
 
 // MIB2
 htmlText = new File(basedir, "target/site/connectors/mib2.html").text
-assert htmlText.indexOf('<h3 id="description">Description</h3>') > - 1 : "MIB2: Page must indicate 'Description' as HTML H3 element"
+assert htmlText.indexOf('<h3 id="description"><a href="#description">Description</a></h3>') > - 1 : "MIB2: Page must indicate 'Description' as HTML anchor in H3 element"
 assert htmlText.indexOf("This connector discovers the enclosure and Ethernet ports of a system equipped with an MIB-2 standard SNMP Agent.") > - 1 : "MIB2: Page must indicate a description"
-assert htmlText.indexOf('<h3 id="target">Target</h3>') > - 1 : "MIB2: Page must indicate 'Target' as HTML H3 element"
+assert htmlText.indexOf('<h3 id="target"><a href="#target">Target</a></h3>') > - 1 : "MIB2: Page must indicate 'Target' as HTML anchor in H3 element"
 assert htmlText.indexOf("Typical platform:") > - 1 : "MIB2: 'Typical platform:' must be present"
 assert htmlText.indexOf("SNMP") > - 1 : "MIB2: typical platform text must be present"
 assert htmlText.indexOf("Operating systems:") > - 1 : "MIB2 'Operating systems:' must be present"
@@ -213,20 +213,20 @@ assert htmlText.indexOf("HP-UX") > -1 : "MIB2: operating system 'HP-UX' must be 
 assert htmlText.indexOf("Storage System") > -1 : "MIB2: operating system 'Storage System' must be present"
 assert htmlText.indexOf("HP OpenVMS") > -1 : "MIB2: operating system 'HP OpenVMS' must be present"
 assert htmlText.indexOf("HP Tru64") > -1 : "MIB2: operating system 'HP Tru64' must be present"
-assert htmlText.indexOf('<h3 id="prerequisites">Prerequisites</h3>') > - 1 : "MIB2: Page must indicate 'Prerequisites' as HTML H3 element"
+assert htmlText.indexOf('<h3 id="prerequisites"><a href="#prerequisites">Prerequisites</a></h3>') > - 1 : "MIB2: Page must indicate 'Prerequisites' as anchor in H3 element"
 assert htmlText.indexOf("Leverages:") > - 1 : "MIB2 'Leverages:' must be present"
 assert htmlText.indexOf("MIB-2 Standard SNMP Agent") > - 1 : "MIB2 leverages text must be present"
 assert htmlText.indexOf("Technology and protocols:") > - 1 : "MIB2 'Technology and protocols:' must be present"
 assert htmlText.indexOf("SNMP") > - 1 : "MIB2 SNMP protocol must be present"
-assert htmlText.indexOf('<h3 id="examples">Examples</h3>') > - 1 : "MIB2: Page must indicate 'Examples' as HTML H3 element"
-assert htmlText.indexOf('<h4 id="cli">CLI</h4>') > - 1 : "MIB2: Page must indicate 'CLI' as HTML H4 element"
+assert htmlText.indexOf('<h3 id="examples"><a href="#examples">Examples</a></h3>') > - 1 : "MIB2: Page must indicate 'Examples' as anchor in H3 element"
+assert htmlText.indexOf('<h4 id="cli"><a href="#cli">CLI</a></h4>') > - 1 : "MIB2: Page must indicate 'CLI' as anchor in H4 element"
 assert htmlText.indexOf("metricshub HOSTNAME -t network -c +MIB2 --snmp v2c --community public") > - 1 : "MIB2: Page must indicate the expected CLI example"
-assert htmlText.indexOf('<h4 id="metricshub-yaml">metricshub.yaml</h4>') > - 1 : "MIB2: Page must indicate 'metricshub.yaml' as HTML H4 element"
+assert htmlText.indexOf('<h4 id="metricshub-yaml"><a href="#metricshub-yaml">metricshub.yaml</a></h4>') > - 1 : "MIB2: Page must indicate 'metricshub.yaml' as anchor in H4 element"
 assert htmlText.indexOf("snmp:") > - 1 : "MIB2: 'snmp:' yaml section must be present"
 assert htmlText.indexOf("v2c") > - 1 : "MIB2: version 'v2c' must be present in the yaml configuration example"
-assert htmlText.indexOf('<h3 id="connector-activation-criteria">Connector Activation Criteria</h3>') > - 1 : "MIB2: Page must indicate 'Connector Activation Criteria' as HTML H3 element"
+assert htmlText.indexOf('<h3 id="connector-activation-criteria"><a href="#connector-activation-criteria">Connector Activation Criteria</a></h3>') > - 1 : "MIB2: Page must indicate 'Connector Activation Criteria' as anchor in H3 element"
 assert htmlText.indexOf("1.3.6.1.2.1.2.2.1") > - 1 : "MIB2: Page must indicate OID '1.3.6.1.2.1.2.2.1'"
-assert htmlText.indexOf('<h3 id="metrics">Metrics</h3>') > - 1 : "MIB2: Page must indicate 'Metrics' as HTML H3 element"
+assert htmlText.indexOf('<h3 id="metrics"><a href="#metrics">Metrics</a></h3>') > - 1 : "MIB2: Page must indicate 'Metrics' as anchor in H3 element"
 
 // MIB2 Network Metrics
 assert htmlText.indexOf('hw.errors{hw.type="network"}') > -1 : 'MIB2: the hw.errors{hw.type="network"} metric must be listed for the Network monitor'
@@ -274,7 +274,7 @@ assert htmlText.indexOf("metricshub HOSTNAME -t win -c +MySQL --jdbc -u USER --j
 assert htmlText.indexOf("<code>SELECT @@version_comment REGEXP 'mysql' AS is_mysql;</code>") > -1 : "MySQL: Page must indicate the activation criterion."
 assert htmlText.indexOf("Expected Result:") > -1 : "MySQL: Page must indicate the Expected Result message."
 assert htmlText.indexOf("<code>1</code>") > -1 : "MySQL: Page must indicate the expected result value."
-assert htmlText.indexOf('<h3 id="metrics">Metrics</h3>') > - 1 : "MySQL: Page must indicate 'Metrics' as HTML H3 element"
+assert htmlText.indexOf('<h3 id="metrics"><a href="#metrics">Metrics</a></h3>') > - 1 : "MySQL: Page must indicate 'Metrics' as anchor in H3 element"
 
 // Verify that the metricshub-connectors-directory.html file has been created
 File directoryHtmlFile = new File(basedir, "target/site/metricshub-connectors-directory.html")
