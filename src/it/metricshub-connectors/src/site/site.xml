@@ -7,7 +7,7 @@
 	<skin>
 		<groupId>org.sentrysoftware.maven</groupId>
 		<artifactId>sentry-maven-skin</artifactId>
-		<version>6.2.00</version>
+		<version>6.4.01</version>
 	</skin>
 
 	<custom>
@@ -17,7 +17,7 @@
 	</custom>
 
 	<bannerLeft>
-		<src>images/sentry-logo-179x75px.png</src>
+		<src>images/metricshub-logo-only.png</src>
 		<href>https://metricshub.com</href>
 	</bannerLeft>
 
