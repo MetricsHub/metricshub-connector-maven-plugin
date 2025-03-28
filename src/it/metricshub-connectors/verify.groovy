@@ -201,9 +201,9 @@ assert htmlText =~ /metricshub.*-t linux.*--ssh.*--sudo-command-list/ : "lmsenso
 
 // MIB2
 htmlText = new File(basedir, "target/site/connectors/mib2.html").text
-assert htmlText.indexOf('<h3 id="description"><a href="#description">Description</a></h3>') > - 1 : "MIB2: Page must indicate 'Description' as HTML anchor in H3 element"
+assert htmlText.indexOf('<h3 id="description"><a href="#description">Description</a></h3>') > - 1 : "MIB2: Page must indicate 'Description' as anchor in H3 element"
 assert htmlText.indexOf("This connector discovers the enclosure and Ethernet ports of a system equipped with an MIB-2 standard SNMP Agent.") > - 1 : "MIB2: Page must indicate a description"
-assert htmlText.indexOf('<h3 id="target"><a href="#target">Target</a></h3>') > - 1 : "MIB2: Page must indicate 'Target' as HTML anchor in H3 element"
+assert htmlText.indexOf('<h3 id="target"><a href="#target">Target</a></h3>') > - 1 : "MIB2: Page must indicate 'Target' as anchor in H3 element"
 assert htmlText.indexOf("Typical platform:") > - 1 : "MIB2: 'Typical platform:' must be present"
 assert htmlText.indexOf("SNMP") > - 1 : "MIB2: typical platform text must be present"
 assert htmlText.indexOf("Operating systems:") > - 1 : "MIB2 'Operating systems:' must be present"
