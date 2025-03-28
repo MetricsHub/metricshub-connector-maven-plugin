@@ -27,7 +27,7 @@ Add the plugin to the `<reporting>` element in the `pom.xml` file of the **Metri
 </project>
 ```
 
-To ensure that the **MetricsHub Community Connectors** project's documentation incorporates the [Sentry Maven Skin](https://sentrysoftware.github.io/sentry-maven-skin/), make sure to include a `./src/site/site.xml` file with the following configuration:
+To ensure that the **MetricsHub Community Connectors** project's documentation incorporates the [Sentry Maven Skin](https://sentrysoftware.org/sentry-maven-skin/), make sure to include a `./src/site/site.xml` file with the following configuration:
 
 ```xml
 <project name="\${project.name}">
