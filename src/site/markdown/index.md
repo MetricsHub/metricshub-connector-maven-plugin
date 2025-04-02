@@ -2,7 +2,7 @@
 
 This is a Maven Report plugin, which is invoked by Maven's site plugin in the `site` lifecycle.
 
-This plugin is designed to be used with the [MetricsHub Community Connectors](https://github.com/metricshub/metricshub-community-connectors).
+This plugin is designed to be used with the [MetricsHub Community Connectors](https://github.com/metricshub/community-connectors).
 
 It reads the connector files from a source directory (E.g. `./src/main/connector`), parses the `.yaml` files and produces the corresponding Reference Guide, as a set of HTML documents (through Doxia's Sink API), which is integrated into the project's documentation.
 

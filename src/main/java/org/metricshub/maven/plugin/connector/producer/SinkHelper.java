@@ -232,7 +232,7 @@ public class SinkHelper {
 	public static String gitHubHyperlinkRef(final String link, final String content) {
 		return String.format(
 			"" +
-			"<a href=\"https://github.com/metricshub/metricshub-community-connectors/tree/main/src/main/connector/%s\" " +
+			"<a href=\"https://github.com/metricshub/community-connectors/tree/main/src/main/connector/%s\" " +
 			"<i class=\"fa-brands fa-github\">" +
 			"</i>" +
 			" %s" +
