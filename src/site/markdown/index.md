@@ -40,12 +40,9 @@ To ensure that the **MetricsHub Community Connectors** project's documentation i
 
 	<body>
 
-		<menu name="MetricsHub Community Connectors">
-			<item name="Supported Platforms" href="platform-requirements.html " />
-		</menu>
-
-		<menu name="Reference">
-			<item name="Reference" href="metricshub-connector-reference.html"/>
+		<menu name="User Documentation">
+			<item name="Connectors Directory" href="metricshub-connectors-directory.html"/>
+			<item name="Connectors Full Listing" href="metricshub-connectors-full-listing.html"/>
 		</menu>
 
 	</body>
