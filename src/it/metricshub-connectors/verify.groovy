@@ -199,8 +199,8 @@ assert htmlText.indexOf("This connector is not available for remote hosts") > - 
 // lmsensors
 htmlText = new File(basedir, "target/site/connectors/lmsensors.html").text
 assert htmlText =~ /metricshub.*-t linux.*--ssh.*--sudo-command-list/ : "lmsensors: CLI must specify linux and ssh and use --sudo-command-list"
-assert htmlText.indexOf("This connector is not available for the local host") > -1 : "MySQL: Page must indicate 'This connector is not available for the local host' message"
-assert htmlText.indexOf("This connector is not available for remote hosts") > - 1 : "MySQL: Page must indicate 'This connector is not available for remote hosts' message"
+assert htmlText.indexOf("This connector is not available for the local host") > -1 : "lmsensors: Page must indicate 'This connector is not available for the local host' message"
+assert htmlText.indexOf("This connector is not available for remote hosts") > - 1 : "lmsensors: Page must indicate 'This connector is not available for remote hosts' message"
 
 // MIB2
 htmlText = new File(basedir, "target/site/connectors/mib2.html").text
