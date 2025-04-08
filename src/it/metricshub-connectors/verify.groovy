@@ -194,10 +194,13 @@ assert htmlText.indexOf("This connector is superseded by") > - 1 : "WBEMGenNetwo
 assert htmlText.indexOf('href="mib2nt.html"') > -1 : "WBEMGenNetwork: Path to superseding connector page must be present"
 assert htmlText.indexOf("wmi:") > -1 : "WBEMGenNetwork: Example must list wmi"
 assert htmlText =~ /metricshub.*-c \+WBEMGenNetwork.*--wmi/ : "WBEMGetNetwork: CLI must specify WBEMGenNetwork and --wmi"
+assert htmlText.indexOf("This connector is not available for remote hosts") > - 1 : "WBEMGenNetwork: Page must indicate 'This connector is not available for remote hosts' message"
 
 // lmsensors
 htmlText = new File(basedir, "target/site/connectors/lmsensors.html").text
 assert htmlText =~ /metricshub.*-t linux.*--ssh.*--sudo-command-list/ : "lmsensors: CLI must specify linux and ssh and use --sudo-command-list"
+assert htmlText.indexOf("This connector is not available for the local host") > -1 : "MySQL: Page must indicate 'This connector is not available for the local host' message"
+assert htmlText.indexOf("This connector is not available for remote hosts") > - 1 : "MySQL: Page must indicate 'This connector is not available for remote hosts' message"
 
 // MIB2
 htmlText = new File(basedir, "target/site/connectors/mib2.html").text
@@ -275,6 +278,8 @@ assert htmlText.indexOf("<code>SELECT @@version_comment REGEXP 'mysql' AS is_mys
 assert htmlText.indexOf("Expected Result:") > -1 : "MySQL: Page must indicate the Expected Result message."
 assert htmlText.indexOf("<code>1</code>") > -1 : "MySQL: Page must indicate the expected result value."
 assert htmlText.indexOf('<h3 id="metrics"><a href="#metrics">Metrics</a></h3>') > - 1 : "MySQL: Page must indicate 'Metrics' as anchor in H3 element"
+assert htmlText.indexOf("This connector is not available for the local host") == -1 : "MySQL: Page must not indicate 'This connector is not available for the local host' message"
+assert htmlText.indexOf("This connector is not available for remote hosts") == - 1 : "MySQL: Page must not indicate 'This connector is not available for remote hosts' message"
 
 // Verify that the metricshub-connectors-directory.html file has been created
 File directoryHtmlFile = new File(basedir, "target/site/metricshub-connectors-directory.html")
