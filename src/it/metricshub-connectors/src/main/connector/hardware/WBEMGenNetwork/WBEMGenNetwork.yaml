@@ -9,7 +9,6 @@ connector:
   information: This connector provides the monitoring of network cards on all Windows-based systems through the WMI layer (root/WMI namespace).
   detection:
     connectionTypes:
-    - remote
     - local
     appliesTo:
     - NT

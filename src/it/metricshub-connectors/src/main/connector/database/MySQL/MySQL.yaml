@@ -6,9 +6,6 @@ connector:
   reliesOn : MySQL Database
   information: Monitors performance and operational metrics for a MySQL database.
   detection:
-    connectionTypes:
-    - remote
-    - local
     appliesTo:
     - windows
     - linux

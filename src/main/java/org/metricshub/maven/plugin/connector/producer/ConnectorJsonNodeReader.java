@@ -62,6 +62,11 @@ import org.metricshub.maven.plugin.connector.producer.model.common.TechnologyTyp
 public class ConnectorJsonNodeReader {
 
 	/**
+	 * Defines a set of default connection types
+	 */
+	private static final Set<String> DEFAULT_CONNECTION_TYPES = Set.of("local", "remote");
+
+	/**
 	 * Defines a regular expression pattern for matching metric names enclosed in curly braces
 	 */
 	private static final Pattern METRIC_NAME_PATTERN = Pattern.compile("^\\s*([^\\{]*)\\{.*\\}\\s*$");
@@ -303,7 +308,8 @@ public class ConnectorJsonNodeReader {
 	 * <p>
 	 * This method looks for the "connectionTypes" field within the "detection" section of the connector configuration.
 	 * If the "detection" section is present and contains the "connectionTypes" field, the method returns a {@link Set}
-	 * of case-insensitive strings representing the connection types. If the "detection" section or the "connectionTypes" field is not
+	 * of case-insensitive strings representing the connection types. If the "detection" section or the "connectionTypes"
+	 * field is not
 	 * present or is not of the expected type, an empty set is returned.
 	 *
 	 * @return A case-insensitive {@link Set} of strings representing the connection types (<em>local</em> and/or <em>remote</em>).
@@ -312,9 +318,12 @@ public class ConnectorJsonNodeReader {
 		final JsonNode detection = getDetection();
 		if (JsonNodeHelper.nonNull(detection)) {
 			final JsonNode connectionTypes = detection.get("connectionTypes"); // NOSONAR JsonNodeHelper.nonNull() is already called
-			return nodeToCaseInsensitiveSet(connectionTypes);
+			final Set<String> connectionTypesSet = nodeToCaseInsensitiveSet(connectionTypes);
+			if (!connectionTypesSet.isEmpty()) {
+				return connectionTypesSet;
+			}
 		}
-		return Collections.emptySet();
+		return DEFAULT_CONNECTION_TYPES;
 	}
 
 	/**

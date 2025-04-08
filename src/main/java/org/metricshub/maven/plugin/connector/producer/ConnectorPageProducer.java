@@ -253,15 +253,16 @@ public class ConnectorPageProducer {
 		final List<String> sudoCommands = connectorJsonNodeReader.getSudoCommands();
 		produceSudoCommandsContent(sink, sudoCommands);
 
-		// Local support = false? (default is true)
 		final Set<String> connectionTypes = connectorJsonNodeReader.getConnectionTypes();
+
+		// Not local support?
 		if (!connectionTypes.contains("local")) {
 			sink.paragraph();
 			sink.text("This connector is not available for the local host (it is applicable to remote hosts only).");
 			sink.paragraph_();
 		}
 
-		// Remote support = false? (default is false)
+		// Not remote support?
 		if (!connectionTypes.contains("remote")) {
 			sink.paragraph();
 			sink.bold();
