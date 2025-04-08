@@ -15,10 +15,10 @@ on:
         description: Open SSH session in the runner
         required: false
         default: false
-        
+
 jobs:
   build:
-    uses: sentrysoftware/workflows/.github/workflows/maven-build.yml@main
+    uses: metricshub/workflows/.github/workflows/maven-build.yml@v2
     with:
       jdkVersion: "17"
       debug: ${{ github.event_name == 'workflow_dispatch' && inputs.debug }}

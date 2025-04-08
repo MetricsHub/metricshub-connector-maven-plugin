@@ -2,7 +2,7 @@
 
 This is a Maven Report plugin, which is invoked by Maven's site plugin in the `site` lifecycle.
 
-This plugin is designed to be used with the [MetricsHub Community Connectors](https://github.com/sentrysoftware/metricshub-community-connectors).
+This plugin is designed to be used with the [MetricsHub Community Connectors](https://github.com/metricshub/community-connectors).
 
 It reads the connector files from a source directory (E.g. `./src/main/connector`), parses the `.yaml` files and produces the corresponding Reference Guide, as a set of HTML documents (through Doxia's Sink API), which is integrated into the project's documentation.
 
@@ -27,25 +27,22 @@ Add the plugin to the `<reporting>` element in the `pom.xml` file of the **Metri
 </project>
 ```
 
-To ensure that the **MetricsHub Community Connectors** project's documentation incorporates the [Sentry Maven Skin](https://sentrysoftware.github.io/sentry-maven-skin/), make sure to include a `./src/site/site.xml` file with the following configuration:
+To ensure that the **MetricsHub Community Connectors** project's documentation incorporates the [Sentry Maven Skin](https://sentrysoftware.org/sentry-maven-skin/), make sure to include a `./src/site/site.xml` file with the following configuration:
 
 ```xml
-<project name="\${project.name}">
+<project name="${esc.d}{project.name}">
 
 	<skin>
 		<groupId>org.sentrysoftware.maven</groupId>
 		<artifactId>sentry-maven-skin</artifactId>
-		<version>6.2.00</version>
+		<version>6.4.01</version>
 	</skin>
 
 	<body>
 
-		<menu name="MetricsHub Community Connectors">
-			<item name="Supported Platforms" href="platform-requirements.html " />
-		</menu>
-
-		<menu name="Reference">
-			<item name="Reference" href="metricshub-connector-reference.html"/>
+		<menu name="User Documentation">
+			<item name="Connectors Directory" href="metricshub-connectors-directory.html"/>
+			<item name="Connectors Full Listing" href="metricshub-connectors-full-listing.html"/>
 		</menu>
 
 	</body>

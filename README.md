@@ -1,12 +1,17 @@
+![GitHub release (with filter)](https://img.shields.io/github/v/release/metricshub/metricshub-connector-maven-plugin)
+![Build](https://img.shields.io/github/actions/workflow/status/metricshub/metricshub-connector-maven-plugin/deploy.yml)
+![GitHub top language](https://img.shields.io/github/languages/top/metricshub/metricshub-connector-maven-plugin)
+![License](https://img.shields.io/github/license/metricshub/metricshub-connector-maven-plugin)
+
 # MetricsHub Connector Maven Plugin
 
 This is a Maven Report plugin, which is invoked by Maven's site plugin in the `site` lifecycle.
 
-This plugin is designed to be used with the [MetricsHub Community Connectors](https://github.com/sentrysoftware/metricshub-community-connectors).
+This plugin is designed to be used with the [MetricsHub Community Connectors](https://github.com/metricshub/community-connectors).
 
 It reads the connector files from a source directory (E.g. `./src/main/connector`), parses the `.yaml` files and produces the corresponding Reference Guide, as a set of HTML documents (through Doxia's Sink API), which is integrated into the project's documentation.
 
-See **[Project Documentation](https://sentrysoftware.github.io/metricshub-connector-maven-plugin)** for more information on how to use this plugin in your maven project.
+See **[Project Documentation](https://metricshub.org/metricshub-connector-maven-plugin)** for more information on how to use this plugin in your maven project.
 
 ## Build instructions
 

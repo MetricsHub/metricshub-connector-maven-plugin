@@ -2,14 +2,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.sentrysoftware</groupId>
+		<groupId>org.metricshub</groupId>
 		<artifactId>oss-parent</artifactId>
 		<version>2</version>
 	</parent>
 
-	<groupId>org.sentrysoftware.maven</groupId>
+	<groupId>org.metricshub.maven</groupId>
 	<artifactId>metricshub-connector-maven-plugin</artifactId>
-	<version>1.0.09-SNAPSHOT</version>
+	<version>1.0.11-SNAPSHOT</version>
 
 	<packaging>maven-plugin</packaging>
 
@@ -24,11 +24,11 @@
 	</description>
 
 	<organization>
-		<name>Sentry Software</name>
-		<url>https://sentrysoftware.com</url>
+		<name>MetricsHub</name>
+		<url>https://metricshub.com</url>
 	</organization>
 
-	<url>https://sentrysoftware.github.io/metricshub-connector-maven-plugin</url>
+	<url>https://metricshub.org/metricshub-connector-maven-plugin</url>
 	<inceptionYear>2023</inceptionYear>
 
 	<licenses>
@@ -41,26 +41,26 @@
 
 	<issueManagement>
 		<system>GitHub</system>
-		<url>https://github.com/sentrysoftware/metricshub-connector-maven-plugin/issues/</url>
+		<url>https://github.com/metricshub/metricshub-connector-maven-plugin/issues/</url>
 	</issueManagement>
 
 	<scm>
-		<connection>scm:git:https://github.com/sentrysoftware/metricshub-connector-maven-plugin.git</connection>
-		<url>https://github.com/sentrysoftware/metricshub-connector-maven-plugin</url>
+		<connection>scm:git:https://github.com/metricshub/metricshub-connector-maven-plugin.git</connection>
+		<url>https://github.com/metricshub/metricshub-connector-maven-plugin</url>
 		<tag>HEAD</tag>
 	</scm>
 
 	<developers>
 		<developer>
 			<name>Bertrand Martin (@bertysentry)</name>
-			<email>bertrand@sentrysoftware.com</email>
+			<email>bertrand@metricshub.com</email>
 			<roles>
 				<role>maintainer</role>
 			</roles>
 		</developer>
 		<developer>
 			<name>Nassim Boutekedjiret (@NassimBtk)</name>
-			<email>nassim@sentrysoftware.com</email>
+			<email>nassim@metricshub.com</email>
 			<roles>
 				<role>maintainer</role>
 			</roles>
@@ -73,7 +73,7 @@
 
 		<!-- Reproducible Build -->
 		<!-- See https://maven.apache.org/guides/mini/guide-reproducible-builds.html -->
-		<project.build.outputTimestamp>2025-01-22T15:57:03Z</project.build.outputTimestamp>
+		<project.build.outputTimestamp>2025-04-02T17:00:16Z</project.build.outputTimestamp>
 	</properties>
 
 	<dependencyManagement>
@@ -81,7 +81,7 @@
 			<dependency>
 				<groupId>org.junit</groupId>
 				<artifactId>junit-bom</artifactId>
-				<version>5.11.0</version>
+				<version>5.12.1</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -127,7 +127,7 @@
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-plugin-api</artifactId>
-			<version>3.9.6</version>
+			<version>3.9.9</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -135,7 +135,7 @@
 		<dependency>
 			<groupId>org.apache.maven.plugin-tools</groupId>
 			<artifactId>maven-plugin-annotations</artifactId>
-			<version>3.15.0</version>
+			<version>3.15.1</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -161,7 +161,7 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-yaml</artifactId>
-			<version>2.17.0</version>
+			<version>2.18.3</version>
 		</dependency>
 
 		<dependency>
@@ -188,7 +188,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-plugin-plugin</artifactId>
-				<version>3.15.1</version>
 				<configuration>
 					<goalPrefix>metricshub-connector</goalPrefix>
 					<skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
@@ -223,12 +222,19 @@
 						<inputGlob>src/test/java/**/*.java</inputGlob>
 					</inputGlobs>
 				</configuration>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 			<!--  maven-invoker-plugin -->
 			<plugin>
 				<artifactId>maven-invoker-plugin</artifactId>
-				<version>3.6.1</version>
 				<configuration>
 					<debug>true</debug>
 					<cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
@@ -259,21 +265,6 @@
 	<reporting>
 		<plugins>
 
-			<!-- checkstyle -->
-			<plugin>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>3.6.0</version>
-				<configuration>
-					<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
-					<linkXref>true</linkXref>
-					<configLocation>checkstyle.xml</configLocation>
-					<sourceDirectories>
-						<sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
-						<sourceDirectory>${project.build.testSourceDirectory}</sourceDirectory> 
-					</sourceDirectories>
-				</configuration>
-			</plugin>
-
 			<!-- pmd -->
 			<plugin>
 				<artifactId>maven-pmd-plugin</artifactId>
@@ -291,6 +282,20 @@
 				</configuration>
 			</plugin>
 
+			<!-- checkstyle -->
+			<plugin>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<configuration>
+					<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
+					<linkXref>true</linkXref>
+					<configLocation>checkstyle.xml</configLocation>
+					<sourceDirectories>
+						<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+						<sourceDirectory>${project.basedir}/src/test/java</sourceDirectory>
+					</sourceDirectories>
+				</configuration>
+			</plugin>
+			
 		</plugins>
 	</reporting>
 

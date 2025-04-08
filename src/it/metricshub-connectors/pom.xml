@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.sentrysoftware.maven</groupId>
+	<groupId>org.metricshub.maven</groupId>
 	<artifactId>metricshub-connectors</artifactId>
 	<name>MetricsHub</name>
 	<version>1.0.00-SNAPSHOT</version>
@@ -19,8 +19,8 @@
 	</organization>
 
 	<scm>
-		<connection>scm:git:https://git.sentrysoftware.integration-test.org/sentrysoftware/metricshub-connectors.git</connection>
-		<url>https://git.sentrysoftware.integration-test.org/sentrysoftware/metricshub-connectors</url>
+		<connection>scm:git:https://git.metricshub.integration-test.org/metricshub/metricshub-connectors.git</connection>
+		<url>https://git.metricshub.integration-test.org/metricshub/metricshub-connectors</url>
 		<tag>HEAD</tag>
 	</scm>
 
