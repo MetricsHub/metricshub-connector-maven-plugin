@@ -65,6 +65,7 @@ public class CriterionFactory {
 		map.put("wbem", CriterionFactory::newWbemCriterion);
 		map.put("wmi", CriterionFactory::newWmiCriterion);
 		map.put("sql", CriterionFactory::newSqlCriterion);
+		map.put("jmx", CriterionFactory::newJmxCriterion);
 
 		CRITERION_FACTORY_MAP = Collections.unmodifiableMap(map);
 	}
@@ -187,6 +188,17 @@ public class CriterionFactory {
 	 */
 	private static SqlCriterion newSqlCriterion(final JsonNode node) {
 		return new SqlCriterion(node);
+	}
+
+	/**
+	 * Creates a new {@link JmxCriterion} instance based on the provided
+	 * {@link JsonNode}.
+	 *
+	 * @param node The {@link JsonNode} containing criterion configuration.
+	 * @return A new {@link JmxCriterion} instance.
+	 */
+	private static JmxCriterion newJmxCriterion(final JsonNode node) {
+		return new JmxCriterion(node);
 	}
 
 	/**

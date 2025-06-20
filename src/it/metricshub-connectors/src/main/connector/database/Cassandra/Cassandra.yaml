@@ -1,0 +1,50 @@
+extends:
+  - ../Database/Database
+
+connector:
+  displayName: Apache Cassandra
+  platforms:
+    - Cassandra
+  reliesOn: Apache Cassandra 3.0 or higher
+  information: >
+    Monitors performance, operational metrics, and cluster health for Cassandra databases through Java Management Extensions (JMX)
+  detection:
+    appliesTo:
+      - nt
+      - linux
+    tags:
+      - database
+      - linux
+      - windows
+    criteria:
+      - type: jmx
+        objectName: org.apache.cassandra.metrics:type=Storage,name=Load
+        attributes:
+        - Count
+        expectedResult: ^[0-9]
+
+monitors:
+  cassandra_cluster:
+    simple:
+      sources:
+        clusterInfoSource:
+          type: jmx
+          objectName: org.apache.cassandra.db:type=StorageService
+          attributes:
+            - "LiveNodes"
+            - "UnreachableNodes"
+            - "JoiningNodes"
+            - "LeavingNodes"
+            - "MovingNodes"
+
+      mapping:
+        source: ${source::clusterInfoSource}
+        attributes:
+          id: cassandra_cluster
+          db.system: cassandra
+        metrics:
+          db.server.cluster.nodes{db.node.state="live"}: $1
+          db.server.cluster.nodes{db.node.state="unreachable"}: $2
+          db.server.cluster.nodes{db.node.state="joining"}: $3
+          db.server.cluster.nodes{db.node.state="leaving"}: $4
+          db.server.cluster.nodes{db.node.state="moving"}: $5

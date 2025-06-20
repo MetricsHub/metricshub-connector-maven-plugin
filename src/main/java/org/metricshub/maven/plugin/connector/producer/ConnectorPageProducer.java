@@ -582,6 +582,13 @@ public class ConnectorPageProducer {
 			appendYamlUsernameAndPassword(yamlBuilder);
 		}
 
+		if (technologies.contains(TechnologyType.JMX)) {
+			cli.append(" --jmx -u USER --jmx-port 7199");
+			yamlBuilder.append("          jmx:\n");
+			yamlBuilder.append("            port: 7199\n");
+			appendYamlUsernameAndPassword(yamlBuilder);
+		}
+
 		// Connector variable
 		if (connectorVariables != null && !connectorVariables.isEmpty()) {
 			yamlBuilder.append("        additionalConnectors:\n");
