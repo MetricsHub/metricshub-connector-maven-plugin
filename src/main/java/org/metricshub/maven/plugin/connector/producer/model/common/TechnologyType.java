@@ -63,7 +63,12 @@ public enum TechnologyType {
 	/**
 	 * SQL through JDBC
 	 */
-	SQL("SQL/JDBC");
+	SQL("SQL/JDBC"),
+
+	/**
+	 * Java Management Extensions (JMX)
+	 */
+	JMX("JMX");
 
 	@Getter
 	private String displayName;
@@ -86,7 +91,8 @@ public enum TechnologyType {
 		"snmpget", SNMP,
 		"wbem", WBEM,
 		"wmi", WMI,
-		"sql", SQL
+		"sql", SQL,
+		"jmx", JMX
 	);
 
 	// @formatter:on
