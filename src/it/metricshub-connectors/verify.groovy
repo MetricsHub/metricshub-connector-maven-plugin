@@ -32,6 +32,7 @@ assert htmlText.indexOf("WBEMGenHBA") > -1 : "metricshub-connectors-full-listing
 assert htmlText.indexOf("WBEMGenLUN") > -1 : "metricshub-connectors-full-listing: WBEMGenLUN must be listed"
 assert htmlText.indexOf("WBEMGenNetwork") > -1 : "metricshub-connectors-full-listing: WBEMGenNetwork must be listed"
 assert htmlText.indexOf("MySQL") > -1 : "metricshub-connectors-full-listing: MySQL must be listed"
+assert htmlText.indexOf("Cassandra") > -1 : "metricshub-connectors-full-listing: Cassandra must be listed"
 
 // Check generated reference files
 String directoryPath = 'target/site/connectors'
@@ -58,7 +59,8 @@ String [] fileNamesToCheck = [
     'wbemgenlun.html',
     'wbemgennetwork.html',
     'winstoragespaces.html',
-    'mysql.html'
+    'mysql.html',
+    'cassandra.html'
 ]
 
 fileNamesToCheck.each { fileName ->
@@ -281,6 +283,21 @@ assert htmlText.indexOf('<h3 id="metrics"><a href="#metrics">Metrics</a></h3>') 
 assert htmlText.indexOf("This connector is not available for the local host") == -1 : "MySQL: Page must not indicate 'This connector is not available for the local host' message"
 assert htmlText.indexOf("This connector is not available for remote hosts") == - 1 : "MySQL: Page must not indicate 'This connector is not available for remote hosts' message"
 
+// Cassandra
+htmlText = new File(basedir, "target/site/connectors/cassandra.html").text
+assert htmlText.indexOf("Cassandra") > -1 : "Cassandra: Unexpected Typical platform"
+assert htmlText.indexOf("Microsoft Windows, Linux") > -1 : "Cassandra: Unexpected Operating Systems"
+assert htmlText.indexOf("Apache Cassandra 3.0 or higher") > -1 : "Cassandra: Unexpected Leverages"
+assert htmlText.indexOf("JMX") > -1 : "Cassandra: Unexpected Technology and protocols"
+assert htmlText.indexOf("metricshub HOSTNAME -t win -c +Cassandra --jmx -u USER --jmx-port 7199") > -1 : "Cassandra: Page must indicate the expected CLI example."
+assert htmlText.indexOf("<code>org.apache.cassandra.metrics:type=Storage,name=Load</code>") > -1 : "Cassandra: Page must indicate the activation criterion MBean."
+assert htmlText.indexOf("<code>Count</code>") > -1 : "Cassandra: Page must indicate the activation criterion attribute."
+assert htmlText.indexOf("Expected Result:") > -1 : "Cassandra: Page must indicate the Expected Result message."
+assert htmlText.indexOf("<code>^[0-9]</code>") > -1 : "Cassandra: Page must indicate the expected result value."
+assert htmlText.indexOf('<h3 id="metrics"><a href="#metrics">Metrics</a></h3>') > - 1 : "Cassandra: Page must indicate 'Metrics' as anchor in H3 element"
+assert htmlText.indexOf("This connector is not available for the local host") == -1 : "Cassandra: Page must not indicate 'This connector is not available for the local host' message"
+assert htmlText.indexOf("This connector is not available for remote hosts") == - 1 : "Cassandra: Page must not indicate 'This connector is not available for remote hosts' message"
+
 // Verify that the metricshub-connectors-directory.html file has been created
 File directoryHtmlFile = new File(basedir, "target/site/metricshub-connectors-directory.html")
 assert directoryHtmlFile.exists() : "Main metricshub-connectors-directory.html page must be created"
@@ -302,7 +319,8 @@ def platforms = [
     [name: "QEMU", link: "connectors/platforms/qemu.html", icon: "qemu"],
     [name: "System with SNMP", link: "connectors/platforms/system-with-snmp.html", icon: "system-with-snmp"],
     [name: "UPS", link: "connectors/platforms/ups.html", icon: "ups"],
-    [name: "Xen", link: "connectors/platforms/xen.html", icon: "xen"]
+    [name: "Xen", link: "connectors/platforms/xen.html", icon: "xen"],
+    [name: "Cassandra", link: "connectors/platforms/cassandra.html", icon: "cassandra"]
 ]
 
 // Check each platform
