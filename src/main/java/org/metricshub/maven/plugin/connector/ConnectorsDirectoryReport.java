@@ -49,7 +49,7 @@ import org.metricshub.maven.plugin.connector.producer.TagPageProducer;
 import org.metricshub.maven.plugin.connector.producer.model.platform.Platform;
 
 /**
- * This Maven report goal builds an HTML Page for the Connectors Directory.
+ * This Maven report goal builds an HTML Page for the Supported Platforms directory.
  *
  * It is invoked during the Maven site generation process.<br>
  *
@@ -235,11 +235,11 @@ public class ConnectorsDirectoryReport extends AbstractConnectorReport {
 		// Create a new sink!
 		final Sink sink;
 		try {
-			sink = getSinkFactory().createSink(outputDirectory, Constants.CONNECTORS_FULL_LISTING_FILE_NAME);
+			sink = getSinkFactory().createSink(outputDirectory, Constants.CONNECTORS_DIRECTORY_FILE_NAME);
 		} catch (IOException e) {
 			final String message = String.format(
 				SINK_CREATION_ERROR_FORMAT,
-				Constants.CONNECTORS_FULL_LISTING_FILE_NAME,
+				Constants.CONNECTORS_DIRECTORY_FILE_NAME,
 				outputDirectory
 			);
 			logger.error(message, e);
@@ -257,12 +257,12 @@ public class ConnectorsDirectoryReport extends AbstractConnectorReport {
 
 	@Override
 	public String getName(final Locale locale) {
-		return "Connectors Directory";
+		return "Supported Platforms";
 	}
 
 	@Override
 	public String getOutputName() {
-		return Constants.CONNECTORS_DIRECTORY_OUTPUT_NAME;
+		return Constants.SUPPORTED_PLATFORMS_OUTPUT_NAME;
 	}
 
 	/**
@@ -279,18 +279,24 @@ public class ConnectorsDirectoryReport extends AbstractConnectorReport {
 			.entrySet()
 			.stream()
 			.flatMap(connectorEntry -> {
-				final JsonNode connector = connectorEntry.getValue();
-				final ConnectorJsonNodeReader reader = new ConnectorJsonNodeReader(connector);
+				final String connectorId = connectorEntry.getKey();
+				final ConnectorJsonNodeReader reader = new ConnectorJsonNodeReader(connectorEntry.getValue());
 				return reader
-					.getAndCompleteTags(enterpriseConnectorIds.contains(connectorEntry.getKey()))
+					.getAndCompleteTags(enterpriseConnectorIds.contains(connectorId))
 					.stream()
 					.filter(tag -> !tag.isBlank())
 					.map(tag -> new AbstractMap.SimpleEntry<>(tag, connectorEntry));
 			})
 			.collect(
 				Collectors.groupingBy(
-					Map.Entry::getKey,
-					Collectors.mapping(Map.Entry::getValue, Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
+					Entry::getKey,
+					HashMap::new,
+					Collectors.toMap(
+						entry -> entry.getValue().getKey(),
+						entry -> entry.getValue().getValue(),
+						(left, right) -> right,
+						HashMap::new
+					)
 				)
 			);
 	}

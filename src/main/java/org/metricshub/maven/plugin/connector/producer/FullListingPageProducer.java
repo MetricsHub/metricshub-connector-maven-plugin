@@ -32,7 +32,7 @@ import org.apache.maven.plugin.logging.Log;
 import org.metricshub.maven.plugin.connector.Constants;
 
 /**
- * Utility class for producing full-listing connectors page.
+ * Utility class for producing the connectors directory page.
  */
 public class FullListingPageProducer extends AbstractPageProducer {
 
@@ -73,7 +73,9 @@ public class FullListingPageProducer extends AbstractPageProducer {
 		Objects.requireNonNull(connectors, () -> "connectors cannot be null.");
 		Objects.requireNonNull(connectorTags, () -> "connectorTags cannot be null.");
 
-		logger.debug(String.format("Generating the full-listing page %s", Constants.CONNECTORS_FULL_LISTING_FILE_NAME));
+		logger.debug(
+			String.format("Generating the connectors directory page %s", Constants.CONNECTORS_DIRECTORY_FILE_NAME)
+		);
 
 		final String title = "${project.name} Connectors";
 

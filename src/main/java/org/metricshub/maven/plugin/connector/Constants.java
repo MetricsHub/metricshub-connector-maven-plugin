@@ -53,19 +53,19 @@ public class Constants {
 	public static final String PLATFORM_SUBDIRECTORY_NAME = "platforms";
 
 	/**
-	 * Connectors directory output name
+	 * Supported platforms output name.
 	 */
-	public static final String CONNECTORS_DIRECTORY_OUTPUT_NAME = "metricshub-connectors-directory";
+	public static final String SUPPORTED_PLATFORMS_OUTPUT_NAME = "supported-platforms";
 
 	/**
-	 * Connectors directory output HTML file name
+	 * Supported platforms output HTML file name.
 	 */
-	public static final String CONNECTORS_DIRECTORY_OUTPUT_FILE_NAME = CONNECTORS_DIRECTORY_OUTPUT_NAME + ".html";
+	public static final String SUPPORTED_PLATFORMS_OUTPUT_FILE_NAME = SUPPORTED_PLATFORMS_OUTPUT_NAME + ".html";
 
 	/**
-	 * Connectors full list file name
+	 * Connectors directory file name.
 	 */
-	public static final String CONNECTORS_FULL_LISTING_FILE_NAME = "metricshub-connectors-full-listing.html";
+	public static final String CONNECTORS_DIRECTORY_FILE_NAME = "connectors-directory.html";
 
 	/**
 	 * CSS class for a medium-sized Bootstrap column with a width of 3.

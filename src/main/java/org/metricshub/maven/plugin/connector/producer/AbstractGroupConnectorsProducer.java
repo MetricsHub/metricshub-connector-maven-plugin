@@ -62,11 +62,11 @@ public abstract class AbstractGroupConnectorsProducer extends AbstractPageProduc
 
 		sink.body();
 
-		// Links to the main page and full listing
+		// Links to the supported platforms and connectors directory pages
 		ConnectorPageProducer.backLinks(
 			sink,
-			String.format("../../%s", Constants.CONNECTORS_DIRECTORY_OUTPUT_FILE_NAME),
-			String.format("../../%s", Constants.CONNECTORS_FULL_LISTING_FILE_NAME)
+			String.format("../../%s", Constants.SUPPORTED_PLATFORMS_OUTPUT_FILE_NAME),
+			String.format("../../%s", Constants.CONNECTORS_DIRECTORY_FILE_NAME)
 		);
 
 		// Title
