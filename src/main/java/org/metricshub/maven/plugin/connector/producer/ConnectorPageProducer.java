@@ -352,7 +352,7 @@ public class ConnectorPageProducer {
 		sink.rawText(SinkHelper.glyphIcon("arrow-left") + SinkHelper.NON_BREAKING_SPACE);
 
 		sink.link(connectorsDirectoryLink);
-		sink.text("Supported platforms");
+		sink.text("Supported Platforms");
 		sink.link_();
 
 		sink.rawText(
@@ -360,7 +360,7 @@ public class ConnectorPageProducer {
 		);
 
 		sink.link(fullListingLink);
-		sink.text("connectors directory");
+		sink.text("Connectors Directory");
 		sink.link_();
 
 		sink.paragraph_();
