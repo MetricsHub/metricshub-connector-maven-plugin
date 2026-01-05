@@ -30,7 +30,7 @@ import org.metricshub.maven.plugin.connector.producer.model.common.TechnologyTyp
 import org.metricshub.maven.plugin.connector.producer.model.platform.Platform;
 
 /**
- * Utility class for producing the platforms page of the connectors directory.
+ * Utility class for producing the supported platforms page.
  */
 public class PlatformsPageProducer {
 
@@ -61,12 +61,12 @@ public class PlatformsPageProducer {
 		Objects.requireNonNull(mainSink, () -> "mainSink cannot be null.");
 
 		logger.debug(
-			String.format("Generating the main platforms page %s", Constants.CONNECTORS_DIRECTORY_OUTPUT_FILE_NAME)
+			String.format("Generating the supported platforms page %s", Constants.SUPPORTED_PLATFORMS_OUTPUT_FILE_NAME)
 		);
 
 		mainSink.head();
 		mainSink.title();
-		mainSink.text("Connectors Directory");
+		mainSink.text("Supported Platforms");
 		mainSink.title_();
 		mainSink.head_();
 
@@ -75,13 +75,13 @@ public class PlatformsPageProducer {
 		// Title
 		mainSink.section1();
 		mainSink.sectionTitle1();
-		mainSink.text("Connectors Directory");
+		mainSink.text("Supported Platforms");
 		mainSink.sectionTitle1_();
 
 		// Introduction
 		mainSink.paragraph();
 		mainSink.text(
-			"This directory lists the platforms supported by ${project.name} ${project.version}." +
+			"This page lists the platforms supported by ${project.name} ${project.version}." +
 			" Each platform page lists the connectors that target that platform."
 		);
 		mainSink.paragraph_();

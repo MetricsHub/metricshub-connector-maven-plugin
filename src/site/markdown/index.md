@@ -41,8 +41,8 @@ To ensure that the **MetricsHub Community Connectors** project's documentation i
 	<body>
 
 		<menu name="User Documentation">
-			<item name="Connectors Directory" href="metricshub-connectors-directory.html"/>
-			<item name="Connectors Full Listing" href="metricshub-connectors-full-listing.html"/>
+			<item name="Supported Platforms" href="supported-platforms.html"/>
+			<item name="Connectors Directory" href="connectors-directory.html"/>
 		</menu>
 
 	</body>

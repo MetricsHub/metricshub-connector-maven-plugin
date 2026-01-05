@@ -92,11 +92,11 @@ public class ConnectorPageProducer {
 
 		sink.body();
 
-		// Links to the main page and full listing
+		// Links to the supported platforms and connectors directory pages
 		backLinks(
 			sink,
-			String.format("../%s", Constants.CONNECTORS_DIRECTORY_OUTPUT_FILE_NAME),
-			String.format("../%s", Constants.CONNECTORS_FULL_LISTING_FILE_NAME)
+			String.format("../%s", Constants.SUPPORTED_PLATFORMS_OUTPUT_FILE_NAME),
+			String.format("../%s", Constants.CONNECTORS_DIRECTORY_FILE_NAME)
 		);
 
 		// Big title
@@ -339,11 +339,11 @@ public class ConnectorPageProducer {
 	}
 
 	/**
-	 * Produces back links to the main page and full listing.
+	 * Produces back links to the supported platforms and connectors directory pages.
 	 *
 	 * @param sink                    The sink used for generating content
-	 * @param connectorsDirectoryLink The link to the connectors directory
-	 * @param fullListingLink         The link to the full listing of connectors
+	 * @param connectorsDirectoryLink The link to the supported platforms page.
+	 * @param fullListingLink         The link to the connectors directory page.
 	 */
 	public static void backLinks(final Sink sink, final String connectorsDirectoryLink, final String fullListingLink) {
 		// Links to the main page and full listing
@@ -352,7 +352,7 @@ public class ConnectorPageProducer {
 		sink.rawText(SinkHelper.glyphIcon("arrow-left") + SinkHelper.NON_BREAKING_SPACE);
 
 		sink.link(connectorsDirectoryLink);
-		sink.text("Connectors directory");
+		sink.text("Supported Platforms");
 		sink.link_();
 
 		sink.rawText(
@@ -360,7 +360,7 @@ public class ConnectorPageProducer {
 		);
 
 		sink.link(fullListingLink);
-		sink.text("Full listing of connectors");
+		sink.text("Connectors Directory");
 		sink.link_();
 
 		sink.paragraph_();
