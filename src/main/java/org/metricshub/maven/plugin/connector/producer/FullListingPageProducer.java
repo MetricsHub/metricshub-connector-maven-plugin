@@ -23,6 +23,7 @@ package org.metricshub.maven.plugin.connector.producer;
 import com.fasterxml.jackson.databind.JsonNode;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -38,6 +39,7 @@ public class FullListingPageProducer extends AbstractPageProducer {
 
 	private final String connectorSubdirectoryName;
 	private final String tagSubdirectoryName;
+	private final String projectName;
 
 	/**
 	 * Constructor for the main page producer.
@@ -45,11 +47,18 @@ public class FullListingPageProducer extends AbstractPageProducer {
 	 * @param logger                     The logger used for logging.
 	 * @param connectorSubdirectoryName  The connector subdirectory name.
 	 * @param tagSubdirectoryName        The tag subdirectory name.
+	 * @param projectName                The name of the project.
 	 */
-	public FullListingPageProducer(Log logger, String connectorSubdirectoryName, String tagSubdirectoryName) {
+	public FullListingPageProducer(
+		Log logger,
+		String connectorSubdirectoryName,
+		String tagSubdirectoryName,
+		String projectName
+	) {
 		super(logger);
 		this.connectorSubdirectoryName = connectorSubdirectoryName;
 		this.tagSubdirectoryName = tagSubdirectoryName;
+		this.projectName = projectName;
 	}
 
 	/**
@@ -72,12 +81,14 @@ public class FullListingPageProducer extends AbstractPageProducer {
 		Objects.requireNonNull(logger, () -> "logger cannot be null.");
 		Objects.requireNonNull(connectors, () -> "connectors cannot be null.");
 		Objects.requireNonNull(connectorTags, () -> "connectorTags cannot be null.");
+		Objects.requireNonNull(projectName, () -> "projectName cannot be null.");
 
 		logger.debug(
 			String.format("Generating the connectors directory page %s", Constants.CONNECTORS_DIRECTORY_FILE_NAME)
 		);
 
-		final String title = "${project.name} Connectors";
+		final String displayProjectName = projectName.trim();
+		final String title = buildTitle(displayProjectName);
 
 		buildHead(mainSink, title);
 
@@ -92,7 +103,7 @@ public class FullListingPageProducer extends AbstractPageProducer {
 		// Intro
 		mainSink.paragraph();
 		mainSink.text(
-			"This directory lists the Connectors of ${project.name} ${project.version}." +
+			String.format("This directory lists the Connectors of %s ${project.version}.", displayProjectName) +
 			" Each page provides you with the details on each Connector, the targeted platform," +
 			" the protocol used, the discovered components and monitored attributes."
 		);
@@ -143,5 +154,19 @@ public class FullListingPageProducer extends AbstractPageProducer {
 		mainSink.body_();
 
 		mainSink.close();
+	}
+
+	/**
+	 * Builds the title for the connectors page.
+	 *
+	 * @param displayProjectName The display name of the project.
+	 * @return The constructed title.
+	 */
+	private static String buildTitle(final String displayProjectName) {
+		final String normalizedName = displayProjectName.strip();
+		if (normalizedName.toLowerCase(Locale.ROOT).endsWith(" connectors")) {
+			return normalizedName;
+		}
+		return normalizedName + " Connectors";
 	}
 }

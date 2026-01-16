@@ -206,4 +206,23 @@ public abstract class AbstractConnectorReport extends AbstractMavenReport {
 		}
 		return mainSink;
 	}
+
+	/**
+	 * Resolve the project name for display in generated pages.
+	 *
+	 * @return The resolved project name, or a default placeholder if unavailable.
+	 */
+	protected String resolveProjectName() {
+		if (project != null) {
+			final String name = project.getName();
+			if (name != null && !name.isBlank()) {
+				return name;
+			}
+			final String artifactId = project.getArtifactId();
+			if (artifactId != null && !artifactId.isBlank()) {
+				return artifactId;
+			}
+		}
+		return "${project.name}";
+	}
 }
