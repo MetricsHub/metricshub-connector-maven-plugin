@@ -246,7 +246,12 @@ public class ConnectorsDirectoryReport extends AbstractConnectorReport {
 			throw new MavenReportException(message, e);
 		}
 
-		new FullListingPageProducer(logger, Constants.CONNECTOR_SUBDIRECTORY_NAME, Constants.TAG_SUBDIRECTORY_NAME)
+		new FullListingPageProducer(
+			logger,
+			Constants.CONNECTOR_SUBDIRECTORY_NAME,
+			Constants.TAG_SUBDIRECTORY_NAME,
+			resolveProjectName()
+		)
 			.produce(sink, connectors, enterpriseConnectorIds, tags);
 	}
 
