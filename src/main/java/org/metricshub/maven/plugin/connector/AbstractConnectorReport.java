@@ -213,12 +213,12 @@ public abstract class AbstractConnectorReport extends AbstractMavenReport {
 	 * @return The resolved project name, or a default placeholder if unavailable.
 	 */
 	protected String resolveProjectName() {
-		if (getProject() != null) {
-			final String name = getProject().getName();
+		if (project != null) {
+			final String name = project.getName();
 			if (name != null && !name.isBlank()) {
 				return name;
 			}
-			final String artifactId = getProject().getArtifactId();
+			final String artifactId = project.getArtifactId();
 			if (artifactId != null && !artifactId.isBlank()) {
 				return artifactId;
 			}
