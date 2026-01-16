@@ -47,6 +47,7 @@ public class FullListingPageProducer extends AbstractPageProducer {
 	 * @param logger                     The logger used for logging.
 	 * @param connectorSubdirectoryName  The connector subdirectory name.
 	 * @param tagSubdirectoryName        The tag subdirectory name.
+	 * @param projectName                The name of the project.
 	 */
 	public FullListingPageProducer(
 		Log logger,
@@ -57,7 +58,7 @@ public class FullListingPageProducer extends AbstractPageProducer {
 		super(logger);
 		this.connectorSubdirectoryName = connectorSubdirectoryName;
 		this.tagSubdirectoryName = tagSubdirectoryName;
-		this.projectName = Objects.requireNonNull(projectName, () -> "projectName cannot be null.");
+		this.projectName = projectName;
 	}
 
 	/**
@@ -80,6 +81,7 @@ public class FullListingPageProducer extends AbstractPageProducer {
 		Objects.requireNonNull(logger, () -> "logger cannot be null.");
 		Objects.requireNonNull(connectors, () -> "connectors cannot be null.");
 		Objects.requireNonNull(connectorTags, () -> "connectorTags cannot be null.");
+		Objects.requireNonNull(projectName, () -> "projectName cannot be null.");
 
 		logger.debug(
 			String.format("Generating the connectors directory page %s", Constants.CONNECTORS_DIRECTORY_FILE_NAME)
@@ -156,6 +158,7 @@ public class FullListingPageProducer extends AbstractPageProducer {
 
 	/**
 	 * Builds the title for the connectors page.
+	 *
 	 * @param displayProjectName The display name of the project.
 	 * @return The constructed title.
 	 */
