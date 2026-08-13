@@ -9,6 +9,14 @@ assert new File(basedir, "target/site/index.html").isFile()
 File htmlFile = new File(basedir, "target/site/connectors-directory.html")
 assert htmlFile.exists() : "Main connectors-directory.html page must be created"
 String htmlText = htmlFile.text
+
+// The full listing must be rendered as a real HTML table (issue #122: Doxia 2 drops tables
+// when the tableRows sink event is missing)
+assert htmlText.indexOf("<table") > -1 : "connectors-directory: the Full Listing must be rendered as an HTML table"
+assert htmlText.indexOf("Connector ID</th>") > -1 : "connectors-directory: 'Connector ID' must be a table header cell"
+def connectorRowCount = (htmlText =~ /<tr[ >]/).count
+assert connectorRowCount >= 20 : "connectors-directory: the Full Listing table must contain one row per connector, found only $connectorRowCount <tr> elements"
+
 assert htmlText.indexOf("MIB2Switch") > -1 : "connectors-directory: MIB2Switch must be listed"
 assert htmlText.indexOf("GenericSwitchEnclosure") > -1 : "connectors-directory: GenericSwitchEnclosure must be listed"
 assert htmlText.indexOf("GenericUPS") > -1 : "connectors-directory: GenericUPS must be listed"
@@ -206,9 +214,9 @@ assert htmlText.indexOf("This connector is not available for remote hosts") > - 
 
 // MIB2
 htmlText = new File(basedir, "target/site/connectors/mib2.html").text
-assert htmlText.indexOf('<h3 id="description"><a href="#description">Description</a></h3>') > - 1 : "MIB2: Page must indicate 'Description' as anchor in H3 element"
+assert htmlText.indexOf('<h2 id="description"><a href="#description">Description</a></h2>') > - 1 : "MIB2: Page must indicate 'Description' as anchor in H2 element"
 assert htmlText.indexOf("This connector discovers the enclosure and Ethernet ports of a system equipped with an MIB-2 standard SNMP Agent.") > - 1 : "MIB2: Page must indicate a description"
-assert htmlText.indexOf('<h3 id="target"><a href="#target">Target</a></h3>') > - 1 : "MIB2: Page must indicate 'Target' as anchor in H3 element"
+assert htmlText.indexOf('<h2 id="target"><a href="#target">Target</a></h2>') > - 1 : "MIB2: Page must indicate 'Target' as anchor in H2 element"
 assert htmlText.indexOf("Typical platform:") > - 1 : "MIB2: 'Typical platform:' must be present"
 assert htmlText.indexOf("SNMP") > - 1 : "MIB2: typical platform text must be present"
 assert htmlText.indexOf("Operating systems:") > - 1 : "MIB2 'Operating systems:' must be present"
@@ -218,20 +226,25 @@ assert htmlText.indexOf("HP-UX") > -1 : "MIB2: operating system 'HP-UX' must be 
 assert htmlText.indexOf("Storage System") > -1 : "MIB2: operating system 'Storage System' must be present"
 assert htmlText.indexOf("HP OpenVMS") > -1 : "MIB2: operating system 'HP OpenVMS' must be present"
 assert htmlText.indexOf("HP Tru64") > -1 : "MIB2: operating system 'HP Tru64' must be present"
-assert htmlText.indexOf('<h3 id="prerequisites"><a href="#prerequisites">Prerequisites</a></h3>') > - 1 : "MIB2: Page must indicate 'Prerequisites' as anchor in H3 element"
+assert htmlText.indexOf('<h2 id="prerequisites"><a href="#prerequisites">Prerequisites</a></h2>') > - 1 : "MIB2: Page must indicate 'Prerequisites' as anchor in H2 element"
 assert htmlText.indexOf("Leverages:") > - 1 : "MIB2 'Leverages:' must be present"
 assert htmlText.indexOf("MIB-2 Standard SNMP Agent") > - 1 : "MIB2 leverages text must be present"
 assert htmlText.indexOf("Technology and protocols:") > - 1 : "MIB2 'Technology and protocols:' must be present"
 assert htmlText.indexOf("SNMP") > - 1 : "MIB2 SNMP protocol must be present"
-assert htmlText.indexOf('<h3 id="examples"><a href="#examples">Examples</a></h3>') > - 1 : "MIB2: Page must indicate 'Examples' as anchor in H3 element"
-assert htmlText.indexOf('<h4 id="cli"><a href="#cli">CLI</a></h4>') > - 1 : "MIB2: Page must indicate 'CLI' as anchor in H4 element"
+assert htmlText.indexOf('<h2 id="examples"><a href="#examples">Examples</a></h2>') > - 1 : "MIB2: Page must indicate 'Examples' as anchor in H2 element"
+assert htmlText.indexOf('<h3 id="cli"><a href="#cli">CLI</a></h3>') > - 1 : "MIB2: Page must indicate 'CLI' as anchor in H3 element"
 assert htmlText.indexOf("metricshub HOSTNAME -t network -c +MIB2 --snmp v2c --community public") > - 1 : "MIB2: Page must indicate the expected CLI example"
-assert htmlText.indexOf('<h4 id="metricshub-yaml"><a href="#metricshub-yaml">metricshub.yaml</a></h4>') > - 1 : "MIB2: Page must indicate 'metricshub.yaml' as anchor in H4 element"
+assert htmlText.indexOf('<h3 id="metricshub-yaml"><a href="#metricshub-yaml">metricshub.yaml</a></h3>') > - 1 : "MIB2: Page must indicate 'metricshub.yaml' as anchor in H3 element"
 assert htmlText.indexOf("snmp:") > - 1 : "MIB2: 'snmp:' yaml section must be present"
 assert htmlText.indexOf("v2c") > - 1 : "MIB2: version 'v2c' must be present in the yaml configuration example"
-assert htmlText.indexOf('<h3 id="connector-activation-criteria"><a href="#connector-activation-criteria">Connector Activation Criteria</a></h3>') > - 1 : "MIB2: Page must indicate 'Connector Activation Criteria' as anchor in H3 element"
+assert htmlText.indexOf('<h2 id="connector-activation-criteria"><a href="#connector-activation-criteria">Connector Activation Criteria</a></h2>') > - 1 : "MIB2: Page must indicate 'Connector Activation Criteria' as anchor in H2 element"
 assert htmlText.indexOf("1.3.6.1.2.1.2.2.1") > - 1 : "MIB2: Page must indicate OID '1.3.6.1.2.1.2.2.1'"
-assert htmlText.indexOf('<h3 id="metrics"><a href="#metrics">Metrics</a></h3>') > - 1 : "MIB2: Page must indicate 'Metrics' as anchor in H3 element"
+assert htmlText.indexOf('<h2 id="metrics"><a href="#metrics">Metrics</a></h2>') > - 1 : "MIB2: Page must indicate 'Metrics' as anchor in H2 element"
+
+// The Metrics section must be rendered as a real HTML table (issue #122: Doxia 2 drops tables
+// when the tableRows sink event is missing)
+assert htmlText.indexOf("<table") > -1 : "MIB2: the Metrics section must contain an HTML table"
+assert htmlText.indexOf("Collected Metrics</th>") > -1 : "MIB2: 'Collected Metrics' must be a table header cell"
 
 // MIB2 Network Metrics
 assert htmlText.indexOf('hw.errors{hw.type="network"}') > -1 : 'MIB2: the hw.errors{hw.type="network"} metric must be listed for the Network monitor'
@@ -279,7 +292,7 @@ assert htmlText.indexOf("metricshub HOSTNAME -t win -c +MySQL --jdbc -u USER --j
 assert htmlText.indexOf("<code>SELECT @@version_comment REGEXP 'mysql' AS is_mysql;</code>") > -1 : "MySQL: Page must indicate the activation criterion."
 assert htmlText.indexOf("Expected Result:") > -1 : "MySQL: Page must indicate the Expected Result message."
 assert htmlText.indexOf("<code>1</code>") > -1 : "MySQL: Page must indicate the expected result value."
-assert htmlText.indexOf('<h3 id="metrics"><a href="#metrics">Metrics</a></h3>') > - 1 : "MySQL: Page must indicate 'Metrics' as anchor in H3 element"
+assert htmlText.indexOf('<h2 id="metrics"><a href="#metrics">Metrics</a></h2>') > - 1 : "MySQL: Page must indicate 'Metrics' as anchor in H2 element"
 assert htmlText.indexOf("This connector is not available for the local host") == -1 : "MySQL: Page must not indicate 'This connector is not available for the local host' message"
 assert htmlText.indexOf("This connector is not available for remote hosts") == - 1 : "MySQL: Page must not indicate 'This connector is not available for remote hosts' message"
 
@@ -294,7 +307,7 @@ assert htmlText.indexOf("<code>org.apache.cassandra.metrics:type=Storage,name=Lo
 assert htmlText.indexOf("<code>Count</code>") > -1 : "Cassandra: Page must indicate the activation criterion attribute."
 assert htmlText.indexOf("Expected Result:") > -1 : "Cassandra: Page must indicate the Expected Result message."
 assert htmlText.indexOf("<code>^[0-9]</code>") > -1 : "Cassandra: Page must indicate the expected result value."
-assert htmlText.indexOf('<h3 id="metrics"><a href="#metrics">Metrics</a></h3>') > - 1 : "Cassandra: Page must indicate 'Metrics' as anchor in H3 element"
+assert htmlText.indexOf('<h2 id="metrics"><a href="#metrics">Metrics</a></h2>') > - 1 : "Cassandra: Page must indicate 'Metrics' as anchor in H2 element"
 assert htmlText.indexOf("This connector is not available for the local host") == -1 : "Cassandra: Page must not indicate 'This connector is not available for the local host' message"
 assert htmlText.indexOf("This connector is not available for remote hosts") == - 1 : "Cassandra: Page must not indicate 'This connector is not available for remote hosts' message"
 

@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<project name="${project.name}"
-	xmlns="http://maven.apache.org/DECORATION/1.8.0"
+<?xml version="1.0" encoding="UTF-8"?>
+<site
+	xmlns="http://maven.apache.org/SITE/2.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd"
+	name="MetricsHub">
 
 	<skin>
 		<groupId>org.sentrysoftware.maven</groupId>
 		<artifactId>sentry-maven-skin</artifactId>
-		<version>6.4.01</version>
+		<version>8.0.00</version>
 	</skin>
 
 	<custom>
@@ -16,13 +17,12 @@
 		<bodyClass>custom-class</bodyClass>
 	</custom>
 
-	<bannerLeft>
-		<src>images/metricshub-logo-only.png</src>
-		<href>https://metricshub.com</href>
+	<bannerLeft name="MetricsHub" href="https://metricshub.com">
+		<image src="images/metricshub-logo-only.png" alt="MetricsHub" />
 	</bannerLeft>
 
 	<body>
-	
+
 		<links>
 			<item name="Fork on GitHub" href="${project.scm.url}" />
 		</links>
@@ -35,4 +35,4 @@
 
 	</body>
 
-</project>
+</site>
