@@ -92,6 +92,10 @@ public abstract class AbstractPageProducer {
 		// Create the table
 		sink.table();
 
+		// The tableRows event is what actually opens the <table> element in Doxia 2.x
+		// (Doxia 1.x silently recovered when it was missing, Doxia 2.x drops the table)
+		sink.tableRows(null, false);
+
 		// Table header
 		buildTableHeaderRow(sink);
 
@@ -163,6 +167,7 @@ public abstract class AbstractPageProducer {
 				sink.tableRow_();
 			});
 
+		sink.tableRows_();
 		sink.table_();
 	}
 

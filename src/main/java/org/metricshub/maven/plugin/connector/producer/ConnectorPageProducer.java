@@ -379,6 +379,11 @@ public class ConnectorPageProducer {
 		sink.sectionTitle2_();
 
 		sink.table();
+
+		// The tableRows event is what actually opens the <table> element in Doxia 2.x
+		// (Doxia 1.x silently recovered when it was missing, Doxia 2.x drops the table)
+		sink.tableRows(null, false);
+
 		sink.tableRow();
 
 		sink.tableHeaderCell(SinkHelper.setClass("col-md-2"));
@@ -460,6 +465,7 @@ public class ConnectorPageProducer {
 				});
 			});
 
+		sink.tableRows_();
 		sink.table_();
 		sink.section2_();
 	}
