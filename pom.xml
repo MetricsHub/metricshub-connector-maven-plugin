@@ -9,7 +9,7 @@
 
 	<groupId>org.metricshub.maven</groupId>
 	<artifactId>metricshub-connector-maven-plugin</artifactId>
-	<version>1.0.14-SNAPSHOT</version>
+	<version>1.0.15-SNAPSHOT</version>
 
 	<packaging>maven-plugin</packaging>
 
