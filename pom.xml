@@ -9,7 +9,7 @@
 
 	<groupId>org.metricshub.maven</groupId>
 	<artifactId>metricshub-connector-maven-plugin</artifactId>
-	<version>1.0.16</version>
+	<version>1.0.17-SNAPSHOT</version>
 
 	<packaging>maven-plugin</packaging>
 
@@ -47,7 +47,7 @@
 	<scm>
 		<connection>scm:git:https://github.com/metricshub/metricshub-connector-maven-plugin.git</connection>
 		<url>https://github.com/metricshub/metricshub-connector-maven-plugin</url>
-		<tag>v1.0.16</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<distributionManagement>
@@ -84,7 +84,7 @@
 
 		<!-- Reproducible Build -->
 		<!-- See https://maven.apache.org/guides/mini/guide-reproducible-builds.html -->
-		<project.build.outputTimestamp>2026-10-29T17:56:46Z</project.build.outputTimestamp>
+		<project.build.outputTimestamp>2026-10-29T17:58:24Z</project.build.outputTimestamp>
 	</properties>
 
 	<dependencyManagement>
