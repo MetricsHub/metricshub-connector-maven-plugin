@@ -8,10 +8,19 @@ It reads the connector files from a source directory (E.g. `./src/main/connector
 
 ## How to Use
 
+The plugin is published to the MetricsHub Maven repository (`https://repo.metricshub.com/repository/maven-public/`), which must be declared as a plugin repository, with the corresponding credentials in the `metricshub` server of your `settings.xml`.
+
 Add the plugin to the `<reporting>` element in the `pom.xml` file of the **MetricsHub Community Connectors** project:
 
 ```xml
 <project>
+	...
+	<pluginRepositories>
+		<pluginRepository>
+			<id>metricshub</id>
+			<url>https://repo.metricshub.com/repository/maven-public/</url>
+		</pluginRepository>
+	</pluginRepositories>
 	...
 	<reporting>
 		<plugins>

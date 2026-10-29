@@ -18,8 +18,9 @@ on:
 
 jobs:
   build:
-    uses: metricshub/workflows/.github/workflows/maven-build.yml@v8
+    uses: metricshub/workflows/.github/workflows/maven-metricshub-build.yml@v9
     with:
       jdkVersion: "17"
       debug: ${{ github.event_name == 'workflow_dispatch' && inputs.debug }}
       ssh: ${{ github.event_name == 'workflow_dispatch' && inputs.ssh }}
+    secrets: inherit
