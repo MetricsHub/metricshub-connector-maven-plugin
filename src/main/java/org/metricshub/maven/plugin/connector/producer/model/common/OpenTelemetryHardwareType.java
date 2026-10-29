@@ -118,8 +118,7 @@ public enum OpenTelemetryHardwareType {
 	/**
 	 * Set of hardware monitor types
 	 */
-	public static final Set<String> MONITOR_TYPES = Stream
-		.of(values())
+	public static final Set<String> MONITOR_TYPES = Stream.of(values())
 		.map(OpenTelemetryHardwareType::getKey)
 		.collect(Collectors.toSet());
 

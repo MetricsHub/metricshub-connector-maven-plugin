@@ -186,8 +186,7 @@ public class ConnectorsDirectoryReport extends AbstractConnectorReport {
 				throw new MavenReportException(message, e);
 			}
 
-			ConnectorPageProducer
-				.builder()
+			ConnectorPageProducer.builder()
 				.withConnectorId(connectorId)
 				.withConnector(connectorEntry.getValue())
 				.withLogger(logger)
@@ -212,17 +211,22 @@ public class ConnectorsDirectoryReport extends AbstractConnectorReport {
 			// Create a new sink!
 			final Sink sink;
 			try {
-				sink =
-					getSinkFactory()
-						.createSink(tagSubdirectory, SinkHelper.buildPageFilename(tag.toLowerCase().replace(' ', '-')));
+				sink = getSinkFactory().createSink(
+					tagSubdirectory,
+					SinkHelper.buildPageFilename(tag.toLowerCase().replace(' ', '-'))
+				);
 			} catch (IOException e) {
 				final String message = String.format(SINK_CREATION_ERROR_FORMAT, tag, tagSubdirectory);
 				logger.error(message, e);
 				throw new MavenReportException(message, e);
 			}
 
-			new TagPageProducer(logger, tag)
-				.produce(sink, connectors, Constants.CONNECTOR_SUBDIRECTORY_NAME, enterpriseConnectorIds);
+			new TagPageProducer(logger, tag).produce(
+				sink,
+				connectors,
+				Constants.CONNECTOR_SUBDIRECTORY_NAME,
+				enterpriseConnectorIds
+			);
 		}
 	}
 
@@ -251,8 +255,7 @@ public class ConnectorsDirectoryReport extends AbstractConnectorReport {
 			Constants.CONNECTOR_SUBDIRECTORY_NAME,
 			Constants.TAG_SUBDIRECTORY_NAME,
 			resolveProjectName()
-		)
-			.produce(sink, connectors, enterpriseConnectorIds, tags);
+		).produce(sink, connectors, enterpriseConnectorIds, tags);
 	}
 
 	@Override
@@ -327,10 +330,8 @@ public class ConnectorsDirectoryReport extends AbstractConnectorReport {
 				final String platformId = kebabCase(platformName);
 
 				// Merge or create
-				final Platform platform = platforms.computeIfAbsent(
-					platformId,
-					id ->
-						new Platform(id, platformName, retrievePlatformIconOutputPath(platformName, id, maybeDefaultIconOutputPath))
+				final Platform platform = platforms.computeIfAbsent(platformId, id ->
+					new Platform(id, platformName, retrievePlatformIconOutputPath(platformName, id, maybeDefaultIconOutputPath))
 				);
 
 				// Add the connector
@@ -426,8 +427,12 @@ public class ConnectorsDirectoryReport extends AbstractConnectorReport {
 				throw new MavenReportException(message, e);
 			}
 
-			new SpecificPlatformPageProducer(logger)
-				.produce(sink, platform, Constants.CONNECTOR_SUBDIRECTORY_NAME, enterpriseConnectorIds);
+			new SpecificPlatformPageProducer(logger).produce(
+				sink,
+				platform,
+				Constants.CONNECTOR_SUBDIRECTORY_NAME,
+				enterpriseConnectorIds
+			);
 		}
 	}
 
@@ -441,7 +446,6 @@ public class ConnectorsDirectoryReport extends AbstractConnectorReport {
 		new PlatformsPageProducer(
 			logger,
 			CHILD_PATH_FORMAT.formatted(Constants.CONNECTOR_SUBDIRECTORY_NAME, Constants.PLATFORM_SUBDIRECTORY_NAME)
-		)
-			.produce(getMainSink(), platforms);
+		).produce(getMainSink(), platforms);
 	}
 }

@@ -82,7 +82,7 @@ public class PlatformsPageProducer {
 		mainSink.paragraph();
 		mainSink.text(
 			"This page lists the platforms supported by ${project.name} ${project.version}." +
-			" Each platform page lists the connectors that target that platform."
+				" Each platform page lists the connectors that target that platform."
 		);
 		mainSink.paragraph_();
 

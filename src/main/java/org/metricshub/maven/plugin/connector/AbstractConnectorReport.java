@@ -147,14 +147,12 @@ public abstract class AbstractConnectorReport extends AbstractMavenReport {
 		public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
 			// Skip this path if it is a directory or not a YAML file
 			if (!Files.isDirectory(file) && "enterprise-connectors-manifest.txt".equals(file.toFile().getName())) {
-				connectorEnterpriseList =
-					Files
-						.readAllLines(file)
-						.stream()
-						.map(String::trim)
-						.filter(line -> !line.isEmpty())
-						.map(filename -> filename.substring(0, filename.lastIndexOf('.')))
-						.collect(Collectors.toCollection(ArrayList::new));
+				connectorEnterpriseList = Files.readAllLines(file)
+					.stream()
+					.map(String::trim)
+					.filter(line -> !line.isEmpty())
+					.map(filename -> filename.substring(0, filename.lastIndexOf('.')))
+					.collect(Collectors.toCollection(ArrayList::new));
 
 				return FileVisitResult.TERMINATE;
 			}

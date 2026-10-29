@@ -213,8 +213,7 @@ public class CriterionFactory {
 			return Optional.empty();
 		}
 
-		return Optional
-			.ofNullable(CRITERION_FACTORY_MAP.get(type.trim().toLowerCase()))
+		return Optional.ofNullable(CRITERION_FACTORY_MAP.get(type.trim().toLowerCase()))
 			.map(creator -> creator.apply(criterionNode))
 			.map(Optional::of)
 			.orElse(Optional.empty());
