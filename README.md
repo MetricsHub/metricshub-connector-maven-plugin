@@ -50,17 +50,20 @@ In case of a build failure, the output of the build is stored in `./metricshub-c
 
 ## Release instructions
 
-The artifact is deployed to Sonatype's [Maven Central](https://central.sonatype.com/).
+The artifact is deployed to the MetricsHub Maven repository:
 
-The actual repository URL is https://s01.oss.sonatype.org/, with server Id `ossrh` and requires credentials to deploy
-artifacts manually.
+* Releases: https://repo.metricshub.com/repository/maven-oss-releases/
+* Snapshots: https://repo.metricshub.com/repository/maven-oss-snapshots/
 
-But it is strongly recommended to only use [GitHub Actions "Release to Maven Central"](actions/workflows/release.yml) to perform a release:
+Both use the server Id `metricshub`, and require credentials to deploy artifacts manually.
+
+But it is strongly recommended to only use [GitHub Actions "Release to repo.metricshub.com"](actions/workflows/release.yml) to perform a release:
 
 * Manually trigger the "Release" workflow
 * Specify the version being released and the next version number (SNAPSHOT)
-* Release the corresponding staging repository on [Sonatype's Nexus server](https://s01.oss.sonatype.org/)
 * Merge the PR that has been created to prepare the next version
+
+The release is published immediately: there is no staging repository to release. A version that has been partially deployed can't be deployed again: delete its components on https://repo.metricshub.com before restarting the workflow, or release the next version instead.
 
 ## License
 

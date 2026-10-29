@@ -104,8 +104,8 @@ public class FullListingPageProducer extends AbstractPageProducer {
 		mainSink.paragraph();
 		mainSink.text(
 			String.format("This directory lists the Connectors of %s ${project.version}.", displayProjectName) +
-			" Each page provides you with the details on each Connector, the targeted platform," +
-			" the protocol used, the discovered components and monitored attributes."
+				" Each page provides you with the details on each Connector, the targeted platform," +
+				" the protocol used, the discovered components and monitored attributes."
 		);
 		mainSink.paragraph_();
 
@@ -116,7 +116,7 @@ public class FullListingPageProducer extends AbstractPageProducer {
 		mainSink.paragraph();
 		mainSink.text(
 			"The connectors are organized with tags to help you quickly find connectors that" +
-			" meet specific category or vendor. Below is the list of available tags:"
+				" meet specific category or vendor. Below is the list of available tags:"
 		);
 		mainSink.paragraph_();
 

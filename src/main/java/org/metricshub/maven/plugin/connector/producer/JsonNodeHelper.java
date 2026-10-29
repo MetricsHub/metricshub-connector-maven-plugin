@@ -72,12 +72,10 @@ public class JsonNodeHelper {
 	 * @return A sequential {@link Stream} of non-null {@link JsonNode} elements extracted from the given {@link ArrayNode}.
 	 */
 	public static Stream<JsonNode> stream(final ArrayNode arrayNode) {
-		return StreamSupport
-			.stream(
-				Spliterators.spliterator(arrayNode.iterator(), arrayNode.size(), Spliterator.ORDERED | Spliterator.IMMUTABLE),
-				false
-			)
-			.filter(Objects::nonNull);
+		return StreamSupport.stream(
+			Spliterators.spliterator(arrayNode.iterator(), arrayNode.size(), Spliterator.ORDERED | Spliterator.IMMUTABLE),
+			false
+		).filter(Objects::nonNull);
 	}
 
 	/**

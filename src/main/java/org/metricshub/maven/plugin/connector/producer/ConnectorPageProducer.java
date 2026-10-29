@@ -800,12 +800,10 @@ public class ConnectorPageProducer {
 		final String variableDescription = defaultVariable.getDescription();
 		final String variableDefaultValue = defaultVariable.getDefaultValue();
 
-		final String defaultDescriptionString = variableDescription != null
-			? String.format(": %s", variableDescription)
-			: "";
-		final String defaultValueString = variableDefaultValue != null
-			? String.format("(default: <code>%s</code>)", variableDefaultValue)
-			: "";
+		final String defaultDescriptionString =
+			variableDescription != null ? String.format(": %s", variableDescription) : "";
+		final String defaultValueString =
+			variableDefaultValue != null ? String.format("(default: <code>%s</code>)", variableDefaultValue) : "";
 		sink.rawText(String.format("%s %s", defaultDescriptionString, defaultValueString));
 	}
 }

@@ -18,7 +18,8 @@ on:
 
 jobs:
   build:
-    uses: metricshub/workflows/.github/workflows/maven-build.yml@v8
+    # All the dependencies are on Maven Central: no credentials needed, so PRs from forks and Dependabot can be built
+    uses: metricshub/workflows/.github/workflows/maven-build.yml@v9
     with:
       jdkVersion: "17"
       debug: ${{ github.event_name == 'workflow_dispatch' && inputs.debug }}

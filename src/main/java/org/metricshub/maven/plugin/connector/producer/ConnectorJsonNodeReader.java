@@ -105,7 +105,9 @@ public class ConnectorJsonNodeReader {
 	 * @return The information property as a String, or the specified default value if not present.
 	 */
 	public String getInformationOrDefault(final String defaultValue) {
-		final JsonNode information = getConnectorSection().map(node -> node.get("information")).orElse(null);
+		final JsonNode information = getConnectorSection()
+			.map(node -> node.get("information"))
+			.orElse(null);
 
 		return JsonNodeHelper.nonNullTextOrDefault(information, defaultValue);
 	}
@@ -116,7 +118,9 @@ public class ConnectorJsonNodeReader {
 	 * @return The platforms property as a Set, or the specified default value if not present.
 	 */
 	public Set<String> getPlatforms() {
-		final JsonNode platforms = getConnectorSection().map(node -> node.get("platforms")).orElse(null);
+		final JsonNode platforms = getConnectorSection()
+			.map(node -> node.get("platforms"))
+			.orElse(null);
 
 		return JsonNodeHelper.nodeToStringCollection(platforms, TreeSet<String>::new);
 	}
@@ -163,13 +167,13 @@ public class ConnectorJsonNodeReader {
 		final JsonNode criteria = getDetectionCriteria();
 
 		// If criteria information is not available or is not an array, return null
-		if (!JsonNodeHelper.nonNull(criteria) || !criteria.isArray()) { // NOSONAR JsonNodeHelper.nonNull() is already called
+		if (!JsonNodeHelper.nonNull(criteria) || !criteria.isArray()) {
+			// NOSONAR JsonNodeHelper.nonNull() is already called
 			return null;
 		}
 
 		// Filter criteria of type "productRequirements" and extract the engine version
-		return JsonNodeHelper
-			.stream((ArrayNode) criteria)
+		return JsonNodeHelper.stream((ArrayNode) criteria)
 			.filter(node -> {
 				final JsonNode typeNode = getType(node);
 				return JsonNodeHelper.nonNull(typeNode) && "productrequirements".equalsIgnoreCase(typeNode.asText());
@@ -213,7 +217,9 @@ public class ConnectorJsonNodeReader {
 	 * @return The "detection" field from the connector node as a {@link JsonNode}, or {@code null} if not available.
 	 */
 	private JsonNode getDetection() {
-		return getConnectorSection().map(node -> node.get("detection")).orElse(null);
+		return getConnectorSection()
+			.map(node -> node.get("detection"))
+			.orElse(null);
 	}
 
 	/**
@@ -223,7 +229,9 @@ public class ConnectorJsonNodeReader {
 	 * @return The reliesOn property as a String, or the specified default value if not present.
 	 */
 	public String getReliesOnOrDefault(final String defaultValue) {
-		final JsonNode reliesOn = getConnectorSection().map(node -> node.get("reliesOn")).orElse(null);
+		final JsonNode reliesOn = getConnectorSection()
+			.map(node -> node.get("reliesOn"))
+			.orElse(null);
 
 		return JsonNodeHelper.nonNullTextOrDefault(reliesOn, defaultValue);
 	}
@@ -247,8 +255,9 @@ public class ConnectorJsonNodeReader {
 	 */
 	public Set<TechnologyType> getTechnologies() {
 		final Set<TechnologyType> technologies = new HashSet<>();
-		getMonitors()
-			.ifPresent(monitors -> monitors.forEach(monitor -> collectTechnologies(technologies, getMonitorJobs(monitor))));
+		getMonitors().ifPresent(monitors ->
+			monitors.forEach(monitor -> collectTechnologies(technologies, getMonitorJobs(monitor)))
+		);
 
 		return technologies;
 	}
@@ -272,8 +281,7 @@ public class ConnectorJsonNodeReader {
 	 * @param jobs         The JSON nodes representing different jobs (e.g., discovery, collect, simple).
 	 */
 	private void collectTechnologies(final Set<TechnologyType> technologies, final JsonNode... jobs) {
-		Stream
-			.of(jobs)
+		Stream.of(jobs)
 			.filter(JsonNodeHelper::nonNull)
 			.forEach(job -> {
 				final JsonNode sources = job.get("sources");
@@ -383,7 +391,8 @@ public class ConnectorJsonNodeReader {
 	public List<JsonNode> getCriteria() {
 		final JsonNode detectionCriteria = getDetectionCriteria();
 
-		if (JsonNodeHelper.nonNull(detectionCriteria) && detectionCriteria.isArray()) { // NOSONAR JsonNodeHelper.nonNull() is already called
+		if (JsonNodeHelper.nonNull(detectionCriteria) && detectionCriteria.isArray()) {
+			// NOSONAR JsonNodeHelper.nonNull() is already called
 			return JsonNodeHelper.stream((ArrayNode) detectionCriteria).collect(Collectors.toList());
 		}
 
@@ -439,8 +448,7 @@ public class ConnectorJsonNodeReader {
 	 * @param jobs          The monitor jobs as an array of {@link JsonNode}.
 	 */
 	private void collectAttributes(final Set<String> attributeKeys, final JsonNode... jobs) {
-		Stream
-			.of(jobs)
+		Stream.of(jobs)
 			.filter(JsonNodeHelper::nonNull)
 			.forEach(job -> {
 				final JsonNode mapping = getMapping(job);
@@ -481,8 +489,7 @@ public class ConnectorJsonNodeReader {
 	 * @param jobs       The monitor jobs as an array of {@link JsonNode}.
 	 */
 	private void collectMetrics(final Set<String> metricKeys, final JsonNode... jobs) {
-		Stream
-			.of(jobs)
+		Stream.of(jobs)
 			.filter(JsonNodeHelper::nonNull)
 			.forEach(job -> {
 				final JsonNode mapping = getMapping(job);
@@ -621,9 +628,8 @@ public class ConnectorJsonNodeReader {
 		JsonNode detection = getDetection();
 		if (JsonNodeHelper.nonNull(detection)) {
 			final JsonNode tagsNode = detection.get("tags"); // NOSONAR JsonNodeHelper.nonNull() is already called
-			final ArrayNode tagsArrayNode = tagsNode != null && !tagsNode.isNull()
-				? (ArrayNode) tagsNode
-				: JsonNodeFactory.instance.arrayNode();
+			final ArrayNode tagsArrayNode =
+				tagsNode != null && !tagsNode.isNull() ? (ArrayNode) tagsNode : JsonNodeFactory.instance.arrayNode();
 
 			tagsArrayNode.add(isEnterprise ? "enterprise" : "community");
 
@@ -671,11 +677,14 @@ public class ConnectorJsonNodeReader {
 	 *         each containing a description and a default value. Returns an empty map if no variables are declared.
 	 */
 	public Map<String, ConnectorDefaultVariable> getDefaultVariables() {
-		final JsonNode variablesNode = getConnectorSection().map(node -> node.get("variables")).orElse(null);
+		final JsonNode variablesNode = getConnectorSection()
+			.map(node -> node.get("variables"))
+			.orElse(null);
 
 		final Map<String, ConnectorDefaultVariable> defaultVariables = new HashMap<>();
 		if (JsonNodeHelper.nonNull(variablesNode)) {
-			variablesNode // NOSONAR JsonNodeHelper.nonNull() is already called
+			variablesNode
+				// NOSONAR JsonNodeHelper.nonNull() is already called
 				.fields()
 				.forEachRemaining(entry -> {
 					final String variableName = entry.getKey();
